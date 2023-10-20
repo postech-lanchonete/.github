@@ -1,6 +1,6 @@
 # PosTech - Lanchonete
 
-![alt text for screen readers](logo.png)
+![alt text for screen readers](profile/logo.png)
 
 O projeto Lanchonete do Bairro tem como objetivo desenvolver um sistema de gerenciamento para uma lanchonete familiar. O sistema será desenvolvido utilizando a arquitetura limpa e seguirá os princípios do *Domain-Driven Design* (DDD).
 
