@@ -41,25 +41,25 @@ Alguns dos fluxos que este Sistema se propõe a resolver são os de realização
 
 ### Preparação e entrega do pedido
 
-![alt text for screen readers](fluxo_1_ddd.png)
+![alt text for screen readers](profile/fluxo_1_ddd.png)
 
 Fluxo 1. Fluxo antigo onde o pedido é recebido pela equipe de cozinha por uma anotação em papel e prepara todos os produtos, sem informar seu status a ninguém.
 
 ### Novo fluxo de preparação e entrega do pedido
 
-![alt text for screen readers](./fluxo_2_ddd.png)
+![alt text for screen readers](profile//fluxo_2_ddd.png)
 
 Fluxo 2. Novo fluxo proposto onde a equipe de cozinha pode visualizar os pedidos em um sistema de pedidos e à medida que os produtos são feitos, seu status é alterado e o cliente pode acompanhar este status.
 
 ### Realização do pedido e seu pagamento
 
-![alt text](./fluxo_3_ddd.png)
+![alt text](profile//fluxo_3_ddd.png)
 
 Fluxo 3. Fluxo antigo onde o cliente depende de um funcionário para realizar o pedido e pagamento. Além disso o pedido só é enviado para a equipe da cozinha por uma ação do funcionário.
 
 ### Novo fluxo de realização do pedido e seu pagamento
 
-![alt text](./fluxo_4_ddd.png)
+![alt text](profile//fluxo_4_ddd.png)
 
 Fluxo 4. Fluxo atualizado com nova proposta. Cliente pode interagir diretamente com a interface de seleção de produtos e realizar ele mesmo o pagamento. Além disso, o pedido vai diretamente para o sistema de pedidos assim que o pagamento é realizado.
 
@@ -133,7 +133,7 @@ No contexto deste projeto, o Health Check foi implementado para garantir a integ
 
 O Kubernetes foi escolhido como sistema de orquestração de contêineres por oferecer recursos avançados para gerenciar aplicativos em ambientes de produção. Com recursos como escalabilidade automática, implantação declarativa e tolerância a falhas, o Kubernetes simplifica e automatiza o gerenciamento de aplicativos em contêineres, permitindo alta disponibilidade e escalabilidade. Sua arquitetura modular e extensível, juntamente com a ativa comunidade de desenvolvedores, tornam o Kubernetes uma escolha confiável para empresas que buscam uma solução robusta e escalável para executar e gerenciar seus aplicativos em contêineres.
 
-![alt text](./figura_2_kube.svg.png)
+![alt text](profile/figura_2_kube.svg.png)
 
 Figura 2 - Visão geral da arquitetura do Kubernetes
 
