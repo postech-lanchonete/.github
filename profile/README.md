@@ -133,7 +133,7 @@ No contexto deste projeto, o Health Check foi implementado para garantir a integ
 
 O Kubernetes foi escolhido como sistema de orquestração de contêineres por oferecer recursos avançados para gerenciar aplicativos em ambientes de produção. Com recursos como escalabilidade automática, implantação declarativa e tolerância a falhas, o Kubernetes simplifica e automatiza o gerenciamento de aplicativos em contêineres, permitindo alta disponibilidade e escalabilidade. Sua arquitetura modular e extensível, juntamente com a ativa comunidade de desenvolvedores, tornam o Kubernetes uma escolha confiável para empresas que buscam uma solução robusta e escalável para executar e gerenciar seus aplicativos em contêineres.
 
-![alt text](profile/figura_2_kube.svg.png)
+![alt text](profile/figura_2_kube.svg)
 
 Figura 2 - Visão geral da arquitetura do Kubernetes
 
