@@ -5,22 +5,30 @@
 </p>
 
 <p align="justify">
-  O projeto Lanchonete do Bairro tem como objetivo desenvolver um sistema de gerenciamento para uma lanchonete familiar. O sistema será desenvolvido utilizando a arquitetura limpa e seguirá os princípios do *Domain-Driven Design* (DDD).
+  O projeto Lanchonete do Bairro tem como objetivo desenvolver um sistema de gerenciamento para uma lanchonete familiar. O sistema será desenvolvido utilizando a arquitetura limpa e seguirá os princípios do <b>Domain-Driven Design</b> (DDD).
 </p>
-<p align="justify">
+<details>
+  <summary>Saber mais</summary>
+  <p align="justify">
   Através desse sistema, os clientes terão acesso a uma interface intuitiva onde poderão realizar pedidos e efetuar pagamentos de forma prática. Será possível montar o combo de lanches com opções de lanche, acompanhamento e bebida. O sistema também permitirá que os clientes acompanhem o progresso do seu pedido, desde a confirmação até a entrega ou retirada.
-</p>
-<p align="justify">
-  Além das funcionalidades voltadas para os clientes, o sistema contará com um painel administrativo que permitirá o gerenciamento de clientes, produtos e categorias. O estabelecimento poderá cadastrar novos clientes, gerenciar campanhas promocionais, adicionar, editar e remover produtos, definindo nome, categoria, preço, descrição e imagens. Também será possível acompanhar os pedidos em andamento e verificar o tempo de espera de cada pedido.
-</p>
-<p align="justify">
-  O projeto será desenvolvido utilizando a linguagem de programação Java 17 e o framework Spring Boot. Será integrado ao banco de dados MariaDB para armazenar as informações dos clientes, produtos e pedidos. Além disso, o projeto incluirá a documentação do sistema utilizando a linguagem ubíqua (DDD) e a implementação de *endpoints* RESTful para as funcionalidades descritas.
-</p>
-<p align="justify">
-  Com o projeto Lanchonete do Bairro, pretendemos criar um sistema eficiente e intuitivo que facilite o processo de pedido e pagamento, proporcionando uma experiência agradável aos clientes e auxiliando o estabelecimento.
-</p>
+  </p>
+  <p align="justify">
+    Além das funcionalidades voltadas para os clientes, o sistema contará com um painel administrativo que permitirá o gerenciamento de clientes, produtos e categorias. O estabelecimento poderá cadastrar novos clientes, gerenciar campanhas promocionais, adicionar, editar e remover produtos, definindo nome, categoria, preço, descrição e imagens. Também será possível acompanhar os pedidos em andamento e verificar o tempo de espera de cada pedido.
+  </p>
+  <p align="justify">
+    O projeto será desenvolvido utilizando a linguagem de programação Java 17 e o framework Spring Boot. Será integrado ao banco de dados MariaDB para armazenar as informações dos clientes, produtos e pedidos. Além disso, o projeto incluirá a documentação do sistema utilizando a linguagem ubíqua (DDD) e a implementação de *endpoints* RESTful para as funcionalidades descritas.
+  </p>
+  <p align="justify">
+    Com o projeto Lanchonete do Bairro, pretendemos criar um sistema eficiente e intuitivo que facilite o processo de pedido e pagamento, proporcionando uma experiência agradável aos clientes e auxiliando o estabelecimento.
+  </p>
+</details>
 
-## Linguagem Ubíqua
+## Domain-Driven Design (DDD)
+
+Como anteriormente falado, o projeto utilizou DDD para guiar seu desenvolvimento. A seguir estão alguns dos materiais coletados. 
+
+<details>
+  <summary>Linguagem Ubíqua</summary>
 
 1. Lanchonete: Estabelecimento que oferece uma variedade de alimentos e bebidas.
 2. Cliente: Pessoa que faz um pedido na lanchonete.
@@ -42,8 +50,10 @@
 18. Entrega: Processo de notificar o cliente quando o pedido está pronto para retirada.
 19. Acompanhamento de Pedidos: Funcionalidade que permite acompanhar o status dos pedidos em andamento e estimar o tempo de espera.
 20. Balcão de recolha: Local físico onde os pedidos são entregas quando finalizado para a recolha pelo cliente.
+</details>
 
-## Fluxo de Funcionalidades (Representação Pictográfica)
+<details>
+  <summary>Fluxo de Funcionalidades (Representação Pictográfica)</summary>
 
 <p align="justify">
   Alguns dos fluxos que este Sistema se propõe a resolver são os de realização do pedido e seu pagamento e a preparação e entrega do pedido. Os fluxos foram mapeados como são feitos hoje, sem a implementação do sistema, e como se visualiza após a sua implementação.
@@ -80,6 +90,8 @@ Fluxo 3. Fluxo antigo onde o cliente depende de um funcionário para realizar o 
 </p>
 
 Fluxo 4. Fluxo atualizado com nova proposta. Cliente pode interagir diretamente com a interface de seleção de produtos e realizar ele mesmo o pagamento. Além disso, o pedido vai diretamente para o sistema de pedidos assim que o pagamento é realizado.
+
+</details>
 
 ## Arquitetura limpa
 <p align="justify">
@@ -136,7 +148,8 @@ As camadas do projeto foram divididas seguindo a logica proposta pela arquitetur
   No contexto deste projeto, o Health Check foi implementado para garantir a integridade e a estabilidade do sistema, permitindo que os administradores ou ferramentas de monitoramento verifiquem a saúde da aplicação de forma automatizada. O projeto utiliza o Health Check para fornecer um endpoint específico, `/actuator/health`, que retorna informações sobre o estado do sistema, incluindo o status atual. Isso é útil para identificar problemas e tomar ações corretivas, garantindo a disponibilidade e a qualidade do serviço. Ao utilizar o Health Check, o projeto busca facilitar o monitoramento e o diagnóstico de problemas, contribuindo para uma melhor experiência do usuário e um ambiente mais confiável.
 </p>
 
-## Alguns endpoints úteis
+<details>
+  <summary>Alguns endpoints úteis</summary>
 
 ```sh
 /actuator/health: Informações de saúde da aplicação, incluindo o status do banco de dados.
@@ -149,6 +162,8 @@ As camadas do projeto foram divididas seguindo a logica proposta pela arquitetur
 ```sh
 /actuator/metrics: Métricas da aplicação, como tempo de execução de consultas no banco de dados.
 ```
+
+</details>
 
 ## Kubernetes
 <p align="justify">
@@ -171,3 +186,4 @@ Figura 2 - Visão geral da arquitetura do Kubernetes
 8. ConfigMap: O arquivo "**db.configmap.yaml**" define o ConfigMap, que é utilizado para armazenar e fornecer configurações para os componentes do sistema, como senhas e outras informações sensíveis.
 
 Essas camadas e serviços trabalham juntos para garantir que a requisição seja encaminhada corretamente, que a aplicação esteja disponível, escalável e que haja uma conexão adequada com o banco de dados.
+
