@@ -93,6 +93,14 @@ Fluxo 4. Fluxo atualizado com nova proposta. Cliente pode interagir diretamente 
 
 </details>
 
+## Banco de dados
+<p align="justify">
+A atual solução utiliza um banco de dados relacional, especificamente o MariaDB, para armazenar diversos tipos de dados essenciais para o projeto, incluindo informações de clientes, produtos, pedidos e pagamentos. Essa escolha de um banco de dados SQL foi a mais apropriada devido à natureza monolítica da aplicação e à dependência dos dados entre diferentes partes da aplicação.
+</p>
+<p align="justify">
+À medida que a aplicação avançar para uma arquitetura de microsserviços, realizaremos uma avaliação detalhada para determinar a solução de banco de dados mais adequada a ser adotada por cada microsserviço. Essa abordagem nos permitirá escolher a solução de armazenamento de dados que melhor atenda às necessidades específicas de cada componente da arquitetura.
+</p>
+
 ## Arquitetura limpa
 <p align="justify">
   A arquitetura limpa é um conceito de design de software que promove a separação de responsabilidades em camadas bem definidas. A arquitetura limpa visa manter a independência das camadas, facilitando a manutenção, teste e evolução do software. Ela foi utilizada neste projeto pois permite que este seja eveluido de forma mais simples futuramente.
