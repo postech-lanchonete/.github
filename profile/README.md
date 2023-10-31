@@ -145,7 +145,7 @@ As camadas do projeto foram divididas seguindo a logica proposta pela arquitetur
 
 ## OpenAPI
 <p align="justify">
-  O OpenAPI é uma especificação que define um padrão para descrever APIs RESTful de maneira padronizada, independente de linguagem e de plataforma. Com o OpenAPI é possível documentar de forma estruturada todos os *endpoints*, parâmetros, respostas e demais detalhes de uma API, facilitando a compreensão e a utilização por parte de desenvolvedores e consumidores. Já o Swagger é uma ferramenta que utiliza a especificação OpenAPI para gerar automaticamente a documentação interativa da API. Através do Swagger UI é possível acessar a documentação da API em um formato amigável, que permite explorar os *endpoints*, testar as requisições e visualizar as respostas esperadas. O uso do OpenAPI e do Swagger traz diversos benefícios, como a padronização da documentação, a facilidade de integração entre sistemas e a promoção de uma documentação atualizada e de qualidade. Para acessar a documentação gerada pelo Swagger, basta acessar a URL específica fornecida pelo projeto que é `/swagger-ui/index.html#/`
+  O OpenAPI é uma especificação que define um padrão para descrever APIs RESTful de maneira padronizada, independente de linguagem e de plataforma. Com o OpenAPI é possível documentar de forma estruturada todos os *endpoints*, parâmetros, respostas e demais detalhes de uma API, facilitando a compreensão e a utilização por parte de desenvolvedores e consumidores. Já o Swagger é uma ferramenta que utiliza a especificação OpenAPI para gerar automaticamente a documentação interativa da API. Através do Swagger UI é possível acessar a documentação da API em um formato amigável, que permite explorar os <b>endpoints</b>, testar as requisições e visualizar as respostas esperadas. O uso do OpenAPI e do Swagger traz diversos benefícios, como a padronização da documentação, a facilidade de integração entre sistemas e a promoção de uma documentação atualizada e de qualidade. Para acessar a documentação gerada pelo Swagger, basta acessar a URL específica fornecida pelo projeto que é <code>/swagger-ui/index.html#/</code>
 </p>
 
 ## Verificação de integridade (Health Check)
@@ -153,7 +153,7 @@ As camadas do projeto foram divididas seguindo a logica proposta pela arquitetur
   O Health Check é um mecanismo que permite verificar o estado de saúde de um sistema ou serviço em tempo real. É utilizado para monitorar e validar se o sistema está funcionando corretamente, fornecendo informações sobre sua disponibilidade e desempenho.
 </p>
 <p align="justify">
-  No contexto deste projeto, o Health Check foi implementado para garantir a integridade e a estabilidade do sistema, permitindo que os administradores ou ferramentas de monitoramento verifiquem a saúde da aplicação de forma automatizada. O projeto utiliza o Health Check para fornecer um endpoint específico, `/actuator/health`, que retorna informações sobre o estado do sistema, incluindo o status atual. Isso é útil para identificar problemas e tomar ações corretivas, garantindo a disponibilidade e a qualidade do serviço. Ao utilizar o Health Check, o projeto busca facilitar o monitoramento e o diagnóstico de problemas, contribuindo para uma melhor experiência do usuário e um ambiente mais confiável.
+  No contexto deste projeto, o Health Check foi implementado para garantir a integridade e a estabilidade do sistema, permitindo que os administradores ou ferramentas de monitoramento verifiquem a saúde da aplicação de forma automatizada. O projeto utiliza o Health Check para fornecer um endpoint específico, <code>/actuator/health</code>, que retorna informações sobre o estado do sistema, incluindo o status atual. Isso é útil para identificar problemas e tomar ações corretivas, garantindo a disponibilidade e a qualidade do serviço. Ao utilizar o Health Check, o projeto busca facilitar o monitoramento e o diagnóstico de problemas, contribuindo para uma melhor experiência do usuário e um ambiente mais confiável.
 </p>
 
 <details>
@@ -183,15 +183,19 @@ As camadas do projeto foram divididas seguindo a logica proposta pela arquitetur
 </p>
 
 Figura 2 - Visão geral da arquitetura do Kubernetes
-
-1. Requisição Externa: A requisição inicial é originada externamente e direcionada ao sistema.
-2. Service "lanchonetebairro": Este serviço atua como ponto de entrada para a aplicação principal. O arquivo de configuração "**lanchonetebairro-svc.yaml**" define esse serviço, que desempenha um papel fundamental no roteamento da requisição para o destino adequado.
-3. Deployment: Esta camada consiste nos pods que compõem a aplicação. O arquivo de configuração "**lanchonetebairro-deployment.yaml**" define como esses pods são criados e escalados.
-4. HPA (Horizontal Pod Autoscaler): O arquivo de configuração "**lanchonetebairro-hpa.yaml**" define o HPA, que é responsável por ajustar automaticamente o número de réplicas dos pods com base na carga de trabalho, garantindo escalabilidade.
-5. Pods: São as instâncias individuais da aplicação que foram criadas de acordo com as especificações definidas no *deployment*.
-6. Service do banco de dados MariaDB: O arquivo "**db-svc.yaml**" configura o service que fornece uma interface para acessar o banco de dados MariaDB.
-7. Pod do MariaDB: O arquivo "**db-pod.yaml**" define o pod responsável por executar o banco de dados MariaDB.
-8. ConfigMap: O arquivo "**db.configmap.yaml**" define o ConfigMap, que é utilizado para armazenar e fornecer configurações para os componentes do sistema, como senhas e outras informações sensíveis.
-
-Essas camadas e serviços trabalham juntos para garantir que a requisição seja encaminhada corretamente, que a aplicação esteja disponível, escalável e que haja uma conexão adequada com o banco de dados.
-
+<details>
+  <summary>Explicação</summary>
+  <ol>
+    <li>Requisição Externa: A requisição inicial é originada externamente e direcionada ao sistema. </li>
+    <li>Service "lanchonetebairro": Este serviço atua como ponto de entrada para a aplicação principal. O arquivo de configuração "<b>lanchonetebairro-svc.yaml</b>" define esse serviço, que desempenha um papel fundamental no roteamento da requisição para o destino adequado.</li>
+    <li>Deployment: Esta camada consiste nos pods que compõem a aplicação. O arquivo de configuração "<b>lanchonetebairro-deployment.yaml</b>" define como esses pods são criados e escalados.</li>
+    <li>HPA (Horizontal Pod Autoscaler): O arquivo de configuração "<b>lanchonetebairro-hpa.yaml</b>" define o HPA, que é responsável por ajustar automaticamente o número de réplicas dos pods com base na carga de trabalho, garantindo escalabilidade.</li>
+    <li>Pods: São as instâncias individuais da aplicação que foram criadas de acordo com as especificações definidas no <b>deployment</b>.</li>
+    <li>Service do banco de dados MariaDB: O arquivo "<b>db-svc.yaml</b>" configura o service que fornece uma interface para acessar o banco de dados MariaDB.</li>
+    <li>Pod do MariaDB: O arquivo "<b>db-pod.yaml</b>" define o pod responsável por executar o banco de dados MariaDB.</li>
+    <li>ConfigMap: O arquivo "<b>db.configmap.yaml</b>" define o ConfigMap, que é utilizado para armazenar e fornecer configurações para os componentes do sistema, como senhas e outras informações sensíveis.</li>
+  </ol>
+  <p align="justify">
+    Essas camadas e serviços trabalham juntos para garantir que a requisição seja encaminhada corretamente, que a aplicação esteja disponível, escalável e que haja uma conexão adequada com o banco de dados.
+  </p>
+</deatils>
