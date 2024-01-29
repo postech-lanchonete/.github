@@ -23,6 +23,38 @@
   </p>
 </details>
 
+## Monolito para microservicos
+
+<p align="center">
+  <img src="https://github.com/postech-lanchonete/.github/assets/20681811/2409cb8c-d26b-4ec3-9763-a2a0cdc9d57b" />
+</p>
+
+<p align="justify">
+  Optamos pela transição do serviço monolítico para cinco microserviços distintos visando vantagens como escalabilidade independente, facilitação de manutenção e evolução, desacoplamento de responsabilidades, resiliência a falhas e a possibilidade de utilizar tecnologias específicas para cada contexto. Essa abordagem permite melhorias na eficiência operacional, agilidade no desenvolvimento e maior flexibilidade para adaptação às demandas específicas de cada serviço.
+</p>
+
+- [postech-produtos](https://github.com/postech-lanchonete/postech-produtos)
+- [postech-clientes](https://github.com/postech-lanchonete/postech-clientes)
+- [postech-pedidos](https://github.com/postech-lanchonete/postech-pedidos)
+- [postech-pagamento](https://github.com/postech-lanchonete/postech-pagamento)
+- [postech-producao](https://github.com/postech-lanchonete/postech-producao)
+
+
+## Infraestrutura
+
+A infraestrutura do projeto será implementada utilizando soluções disponíveis na AWS, como EKS, DocumentDB e RDS. O diagrama do fluxo da infraestrutura pode ser visualizado abaixo:
+
+<p align="center">
+  <img src="https://github.com/postech-lanchonete/.github/assets/20681811/90f03df1-b30e-4639-b176-d43b7b7ca343?raw=true" />
+</p>
+
+<p align="justify">
+O Amazon EKS será responsável pelo gerenciamento das APIs, cada uma delas executando em uma instância EC2 dedicada. Além disso, considerando a necessidade de armazenamento de dados em múltiplos bancos, optaremos por diferentes soluções. O serviço DocumentDB será utilizado para armazenar os dados da aplicação de pagamentos, uma vez que a estrutura dessas informações não é crítica para o projeto e não envolve consultas complexas com múltiplas tabelas.
+</p>
+<p align="justify">
+Quanto aos demais projetos, o Amazon RDS foi escolhido devido à sua simplicidade e facilidade de manutenção, proporcionando uma evolução mais ágil das APIs. Optamos por uma única instância de RDS para armazenar os dados, com uma divisão lógica necessária entre os contextos das aplicações. Por fim, o Amazon DynamoDB pode ser necessário para realizar o cache de informações, como tipos de lanches, dados dos clientes, entre outros.
+</p>
+
 ## Domain-Driven Design (DDD)
 
 Como anteriormente falado, o projeto utilizou DDD para guiar seu desenvolvimento. A seguir estão alguns dos materiais coletados. 
