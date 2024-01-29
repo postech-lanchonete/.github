@@ -124,12 +124,3 @@ Fluxo 3. Fluxo antigo onde o cliente depende de um funcionário para realizar o 
 Fluxo 4. Fluxo atualizado com nova proposta. Cliente pode interagir diretamente com a interface de seleção de produtos e realizar ele mesmo o pagamento. Além disso, o pedido vai diretamente para o sistema de pedidos assim que o pagamento é realizado.
 
 </details>
-
-## Banco de dados
-<p align="justify">
-A atual solução utiliza um banco de dados relacional, especificamente o MariaDB, para armazenar diversos tipos de dados essenciais para o projeto, incluindo informações de clientes, produtos, pedidos e pagamentos. Essa escolha de um banco de dados SQL foi a mais apropriada devido à natureza monolítica da aplicação e à dependência dos dados entre diferentes partes da aplicação.
-</p>
-<p align="justify">
-À medida que a aplicação avançar para uma arquitetura de microsserviços, realizaremos uma avaliação detalhada para determinar a solução de banco de dados mais adequada a ser adotada por cada microsserviço. Essa abordagem nos permitirá escolher a solução de armazenamento de dados que melhor atenda às necessidades específicas de cada componente da arquitetura.
-</p>
-
