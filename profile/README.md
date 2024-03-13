@@ -74,6 +74,28 @@ A escolha do Apache Kafka como gerenciador de mensageria se baseia em diversos f
 4. Event Sourcing: O Kafka é adequado para implementar o padrão de Event Sourcing, mantendo um registro de todas as transações e garantindo a consistência do sistema.
 5. Integração com Spring Boot: A integração do Kafka com o Spring Boot simplifica o desenvolvimento e implantação de aplicativos Java baseados em microserviços.
 
+## LGPD
+<p align="justify">
+Para atender à solicitação de criar uma rota/API para exclusão ou inativação de dados pessoais dos clientes, seguindo as diretrizes fornecidas, foi adicionado um novo endpoint dentro do projeto <a href="https://github.com/postech-lanchonete/postech-clientes">postech-clientes</a>. O novo endpoint está localizado em /backoffice e permite que os clientes solicitem a exclusão permanente, exclusão lógica ou anonimização de seus dados pessoais.
+</p>
+
+### Endpoint /backoffice
+O endpoint /backoffice permite enviar solicitações para exclusão, inativação ou anonimização dos dados pessoais de clientes.
+
+#### Operações Suportadas:
+
+**Exclusão Permanente:** Esta operação remove permanentemente os dados do cliente do banco de dados. Após a exclusão permanente, os dados não são mais recuperáveis e o cliente não poderá fazer novos pedidos.
+
+**Exclusão Lógica:** Esta operação realiza uma exclusão lógica dos dados do cliente, marcando-os como inativos no banco de dados. Isso impede que o cliente faça novos pedidos, mas os dados ainda podem ser recuperados, se necessário.
+
+**Anonimização:** Nesta operação, os dados pessoais do cliente são substituídos por informações anônimas, mantendo apenas um identificador interno único.
+
+### Integração com Outros Serviços
+
+Após a exclusão, inativação ou anonimização dos dados do cliente, todas as informações relacionadas ao cliente foram removidas dos outros serviços. Os serviços que precisam dessas informações podem fazer uma chamada REST ao serviço de clientes utilizando apenas o ID interno do cliente.
+
+Por exemplo, o serviço de pedidos pode retornar apenas o ID do cliente ao consultar a lista de pedidos. No entanto, se a consulta for para um pedido específico, o serviço de pedidos fará uma chamada ao serviço de clientes para buscar as informações necessárias, caso ainda existam.
+
 ## Infraestrutura
 
 A infraestrutura do projeto será implementada utilizando soluções disponíveis na AWS, como EKS, DocumentDB e RDS. O diagrama do fluxo da infraestrutura pode ser visualizado abaixo:
