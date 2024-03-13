@@ -33,12 +33,46 @@
   Optamos pela transição do serviço monolítico para cinco microserviços distintos visando vantagens como escalabilidade independente, facilitação de manutenção e evolução, desacoplamento de responsabilidades, resiliência a falhas e a possibilidade de utilizar tecnologias específicas para cada contexto. Essa abordagem permite melhorias na eficiência operacional, agilidade no desenvolvimento e maior flexibilidade para adaptação às demandas específicas de cada serviço.
 </p>
 
-- [postech-produtos](https://github.com/postech-lanchonete/postech-produtos)
-- [postech-clientes](https://github.com/postech-lanchonete/postech-clientes)
-- [postech-pedidos](https://github.com/postech-lanchonete/postech-pedidos)
-- [postech-pagamento](https://github.com/postech-lanchonete/postech-pagamento)
-- [postech-producao](https://github.com/postech-lanchonete/postech-producao)
+| Projeto                   | Cobertura de Código SonarCloud |
+|---------------------------|--------------------------------|
+| [postech-produtos](https://github.com/postech-lanchonete/postech-produtos) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=postech-lanchonete_postech-produtos&metric=coverage)](https://sonarcloud.io/summary/new_code?id=postech-lanchonete_postech-produtos) |
+| [postech-clientes](https://github.com/postech-lanchonete/postech-clientes) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=postech-lanchonete_postech-clientes&metric=coverage)](https://sonarcloud.io/summary/new_code?id=postech-lanchonete_postech-clientes) |
+| [postech-pedidos](https://github.com/postech-lanchonete/postech-pedidos) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=postech-lanchonete_postech-pedidos&metric=coverage)](https://sonarcloud.io/summary/new_code?id=postech-lanchonete_postech-pedidos) |
+| [postech-pagamento](https://github.com/postech-lanchonete/postech-pagamento) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=postech-lanchonete_postech-pagamento&metric=coverage)](https://sonarcloud.io/summary/new_code?id=postech-lanchonete_postech-pagamento) |
+| [postech-producao](https://github.com/postech-lanchonete/postech-producao) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=postech-lanchonete_postech-producao&metric=coverage)](https://sonarcloud.io/summary/new_code?id=postech-lanchonete_postech-producao) |
 
+## Padrão Saga
+
+<p align="justify">
+  Este projeto implementa o padrão Saga para processar o fluxo de pagamento de uma aplicação utilizando o Apache Kafka como gerenciador de mensageria. O padrão Saga é utilizado para garantir a consistência e disponibilidade da aplicação, especialmente em cenários de transações distribuídas.
+</p>
+
+<p align="center">
+  <img src="https://github.com/postech-lanchonete/.github/assets/20681811/ca72bd9b-d630-48cd-8654-8aeca107682c" />
+</p>
+
+### Fluxo de Execução
+
+1. O processo se inicia com o serviço postech-pedido, responsável por receber e processar os pedidos dos clientes.
+2. Quando um pedido é recebido, o serviço postech-pedido publica uma mensagem no tópico do Kafka para iniciar o fluxo de pagamento.
+3. O serviço de pagamento, ao consumir a mensagem do tópico, processa o pagamento do pedido.
+4. Após a conclusão do pagamento com sucesso, o serviço de pagamento publica uma mensagem em outro tópico do Kafka.
+5. O serviço postech-pedido consome essa mensagem e, em seguida, envia o pedido para a produção.
+
+### Justificativa da Utilização do Tipo Orquestração
+
+<p align="justify">
+  Optei por utilizar o tipo de orquestração no padrão Saga devido à complexidade e dependência entre as etapas do processo de pagamento. A orquestração permite coordenar as diversas operações necessárias para concluir o fluxo de pagamento, garantindo a consistência e o controle do processo como um todo.
+</p>
+
+### Justificativa da Utilização do Apache Kafka
+A escolha do Apache Kafka como gerenciador de mensageria se baseia em diversos fatores:
+
+1. Escalabilidade e Desempenho: O Apache Kafka é altamente escalável e pode processar milhares de requisições simultâneas, garantindo a disponibilidade e performance da aplicação.
+2. Desacoplamento: O uso do Kafka promove um alto nível de desacoplamento entre os serviços, permitindo que operem de forma independente.
+3. Tolerância a Falhas: O Kafka oferece resiliência e tolerância a falhas, garantindo a integridade das mensagens mesmo em caso de falhas no sistema.
+4. Event Sourcing: O Kafka é adequado para implementar o padrão de Event Sourcing, mantendo um registro de todas as transações e garantindo a consistência do sistema.
+5. Integração com Spring Boot: A integração do Kafka com o Spring Boot simplifica o desenvolvimento e implantação de aplicativos Java baseados em microserviços.
 
 ## Infraestrutura
 
