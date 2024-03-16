@@ -62,7 +62,7 @@
 ### Justificativa da Utilização do Tipo Orquestração
 
 <p align="justify">
-  Optei por utilizar o tipo de orquestração no padrão Saga devido à complexidade e dependência entre as etapas do processo de pagamento. A orquestração permite coordenar as diversas operações necessárias para concluir o fluxo de pagamento, garantindo a consistência e o controle do processo como um todo.
+  Optou-se por utilizar o tipo de orquestração no padrão Saga devido à complexidade e dependência entre as etapas do processo de pagamento. A orquestração permite coordenar as diversas operações necessárias para concluir o fluxo de pagamento, garantindo a consistência e o controle do processo como um todo.
 </p>
 
 ### Justificativa da Utilização do Apache Kafka
@@ -80,7 +80,11 @@ Para atender à solicitação de criar uma rota/API para exclusão ou inativaç�
 </p>
 
 ### Endpoint /backoffice
-O endpoint /backoffice permite enviar solicitações para exclusão, inativação ou anonimização dos dados pessoais de clientes.
+O endpoint /backoffice do projeto <a href="https://github.com/postech-lanchonete/postech-clientes">postech-clientes</a> permite enviar solicitações para exclusão, inativação ou anonimização dos dados pessoais de clientes.
+
+#### Comprovante legal
+
+Por se tratar de uma operação legal, ao final da alteração do cliente, é salvo um comprovativo desta operação para fins legais.
 
 #### Operações Suportadas:
 
@@ -94,7 +98,7 @@ O endpoint /backoffice permite enviar solicitações para exclusão, inativaçã
 
 Após a exclusão, inativação ou anonimização dos dados do cliente, todas as informações relacionadas ao cliente foram removidas dos outros serviços. Os serviços que precisam dessas informações podem fazer uma chamada REST ao serviço de clientes utilizando apenas o ID interno do cliente.
 
-Por exemplo, o serviço de pedidos pode retornar apenas o ID do cliente ao consultar a lista de pedidos. No entanto, se a consulta for para um pedido específico, o serviço de pedidos fará uma chamada ao serviço de clientes para buscar as informações necessárias, caso ainda existam.
+Por exemplo, o serviço de pedidos retorna apenas o ID do cliente ao consultar a lista de pedidos. No entanto, se a consulta for para um pedido específico, o serviço de pedidos fará uma chamada ao serviço de clientes para buscar as informações necessárias, caso ainda existam.
 
 ## Infraestrutura
 
