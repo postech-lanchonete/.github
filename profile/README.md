@@ -58,6 +58,11 @@
 3. O serviço de pagamento, ao consumir a mensagem do tópico, processa o pagamento do pedido.
 4. Após a conclusão do pagamento com sucesso, o serviço de pagamento publica uma mensagem em outro tópico do Kafka.
 5. O serviço postech-pedido consome essa mensagem e, em seguida, envia o pedido para a produção.
+   1. Caso o pagamento seja rejeitado, entao o serviço postech-pedido atualiza o status e nada é enviado para o serviço postech-producao
+  
+| 💡 Tip |
+|--------|
+| Todos os tópicos também possuem um tópico DLQ caso a desserialização não seja possível |
 
 ### Justificativa da Utilização do Tipo Orquestração
 
