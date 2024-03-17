@@ -41,7 +41,7 @@
 | [postech-pagamento](https://github.com/postech-lanchonete/postech-pagamento) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=postech-lanchonete_postech-pagamento&metric=coverage)](https://sonarcloud.io/summary/new_code?id=postech-lanchonete_postech-pagamento) |
 | [postech-producao](https://github.com/postech-lanchonete/postech-producao) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=postech-lanchonete_postech-producao&metric=coverage)](https://sonarcloud.io/summary/new_code?id=postech-lanchonete_postech-producao) |
 
-## Padrão Saga
+## Padrão Saga <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
 
 <p align="justify">
   Este projeto implementa o padrão Saga para processar o fluxo de pagamento de uma aplicação utilizando o Apache Kafka como gerenciador de mensageria. O padrão Saga é utilizado para garantir a consistência e disponibilidade da aplicação, especialmente em cenários de transações distribuídas.
@@ -79,19 +79,24 @@ A escolha do Apache Kafka como gerenciador de mensageria se baseia em diversos f
 4. Event Sourcing: O Kafka é adequado para implementar o padrão de Event Sourcing, mantendo um registro de todas as transações e garantindo a consistência do sistema.
 5. Integração com Spring Boot: A integração do Kafka com o Spring Boot simplifica o desenvolvimento e implantação de aplicativos Java baseados em microserviços.
 
-## LGPD
+## LGPD  <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
+
+### Relatório RIPD
+
+Foi criado um relatório RIPD que pode ser [acessado aqui](https://postech-lanchonete.github.io/postech-relatorios/lgpd/).
+
 <p align="justify">
 Para atender à solicitação de criar uma rota/API para exclusão ou inativação de dados pessoais dos clientes, seguindo as diretrizes fornecidas, foi adicionado um novo endpoint dentro do projeto <a href="https://github.com/postech-lanchonete/postech-clientes">postech-clientes</a>. O novo endpoint está localizado em /backoffice e permite que os clientes solicitem a exclusão permanente, exclusão lógica ou anonimização de seus dados pessoais.
 </p>
 
-### Endpoint /backoffice
+### Endpoint /backoffice  <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
 O endpoint /backoffice do projeto <a href="https://github.com/postech-lanchonete/postech-clientes">postech-clientes</a> permite enviar solicitações para exclusão, inativação ou anonimização dos dados pessoais de clientes.
 
 #### Comprovante legal
 
 Por se tratar de uma operação legal, ao final da alteração do cliente, é salvo um comprovativo desta operação para fins legais.
 
-#### Operações Suportadas:
+#### Operações suportadas:
 
 **Exclusão Permanente:** Esta operação remove permanentemente os dados do cliente do banco de dados. Após a exclusão permanente, os dados não são mais recuperáveis e o cliente não poderá fazer novos pedidos.
 
@@ -104,6 +109,10 @@ Por se tratar de uma operação legal, ao final da alteração do cliente, é sa
 Após a exclusão, inativação ou anonimização dos dados do cliente, todas as informações relacionadas ao cliente foram removidas dos outros serviços. Os serviços que precisam dessas informações podem fazer uma chamada REST ao serviço de clientes utilizando apenas o ID interno do cliente.
 
 Por exemplo, o serviço de pedidos retorna apenas o ID do cliente ao consultar a lista de pedidos. No entanto, se a consulta for para um pedido específico, o serviço de pedidos fará uma chamada ao serviço de clientes para buscar as informações necessárias, caso ainda existam.
+
+## OWASP ZAP  <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
+
+Os reports fornecidos pela ferramente ZAP podem ser [acessado aqui](https://postech-lanchonete.github.io/postech-relatorios/zap/).
 
 ## Infraestrutura
 
