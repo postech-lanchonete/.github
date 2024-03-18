@@ -70,7 +70,7 @@ A escolha do Apache Kafka como gerenciador de mensageria se baseia em diversos f
 4. Event Sourcing: O Kafka é adequado para implementar o padrão de Event Sourcing, mantendo um registro de todas as transações e garantindo a consistência do sistema.
 5. Integração com Spring Boot: A integração do Kafka com o Spring Boot simplifica o desenvolvimento e implantação de aplicativos Java baseados em microserviços.
 
-### Solução na AWS
+### Solução na AWS <img src="https://img.shields.io/badge/Fase-5-important.svg?">
 
 Uma vez que os serviços sejam migrados 100% para a AWS, sugere-se esta utilização de arquitetura de tópicos e filas:
 
@@ -78,9 +78,9 @@ Uma vez que os serviços sejam migrados 100% para a AWS, sugere-se esta utiliza�
   <img src="https://github.com/postech-lanchonete/.github/assets/20681811/66783608-c155-4489-86c0-fb1e180328f0?raw=true" />
 </p>
 
-### Rodar o projeto na máquina local <img src="https://img.shields.io/badge/Fase-5-important.sv
+### Rodar o projeto na máquina local <img src="https://img.shields.io/badge/Fase-5-important.svg?">
 
-Para testar a solução de forma local, sugiro a utilização deste [docker-compose](../infra/docker-compose.yml). Ele irá subir toda a infraestrutura necessária (zookeeper, kafka, mysql e mongodb) e também todas as cinco aplicações.
+Para testar a solução de forma local, sugiro a utilização deste [docker-compose](../main/infra/docker-compose.yml). Ele irá subir toda a infraestrutura necessária (zookeeper, kafka, mysql e mongodb) e também todas as cinco aplicações.
 
 Após isso, você pode rodar este teste rápido que criará um cliente, um produto, fará um pedido e irá aprová-lo. Ao fim, ele irá fazer uma requisição *GET* buscando as informações do pedido.
 
@@ -115,7 +115,7 @@ curl -X 'GET' 'http://localhost:8080/v1/pedidos/1' -H 'accept: */*'
 </p>
 
 </details>
-## LGPD  <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
+## LGPD <img src="https://img.shields.io/badge/Fase-5-important.svg?">
 
 ### Relatório RIPD
 
