@@ -8,7 +8,7 @@
   O projeto Lanchonete do Bairro tem como objetivo desenvolver um sistema de gerenciamento para uma lanchonete familiar. O sistema será desenvolvido utilizando a arquitetura limpa e seguirá os princípios do <b>Domain-Driven Design</b> (DDD).
 </p>
 <details>
-  <summary>Saber mais sobre o projeto</summary>
+  <summary>Saber mais sobre o projeto <img src="https://img.shields.io/badge/Fase-1-white.svg?"></summary>
   <p align="justify">
   Através desse sistema, os clientes terão acesso a uma interface intuitiva onde poderão realizar pedidos e efetuar pagamentos de forma prática. Será possível montar o combo de lanches com opções de lanche, acompanhamento e bebida. O sistema também permitirá que os clientes acompanhem o progresso do seu pedido, desde a confirmação até a entrega ou retirada.
   </p>
@@ -23,7 +23,7 @@
   </p>
 </details>
 
-## Monolito para microservicos
+## Monolito para microservicos <img src="https://img.shields.io/badge/Fase-4-blue.svg?">
 
 <p align="center">
   <img src="https://github.com/postech-lanchonete/.github/assets/20681811/2409cb8c-d26b-4ec3-9763-a2a0cdc9d57b" />
@@ -51,7 +51,7 @@
   <img src="https://github.com/postech-lanchonete/.github/assets/20681811/ca72bd9b-d630-48cd-8654-8aeca107682c" />
 </p>
 
-### Fluxo de Execução
+### Fluxo de Execução <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
 
 1. O processo se inicia com o serviço postech-pedido, responsável por receber e processar os pedidos dos clientes.
 2. Quando um pedido é recebido, o serviço postech-pedido publica uma mensagem no tópico do Kafka para iniciar o fluxo de pagamento.
@@ -64,13 +64,14 @@
 |--------|
 | Todos os tópicos também possuem um tópico DLQ caso a desserialização não seja possível |
 
-### Justificativa da Utilização do Tipo Orquestração
+
+### Justificativa da Utilização do Tipo Orquestração <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
 
 <p align="justify">
   Optou-se por utilizar o tipo de orquestração no padrão Saga devido à complexidade e dependência entre as etapas do processo de pagamento. A orquestração permite coordenar as diversas operações necessárias para concluir o fluxo de pagamento, garantindo a consistência e o controle do processo como um todo.
 </p>
 
-### Justificativa da Utilização do Apache Kafka
+### Justificativa da Utilização do Apache Kafka <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
 A escolha do Apache Kafka como gerenciador de mensageria se baseia em diversos fatores:
 
 1. Escalabilidade e Desempenho: O Apache Kafka é altamente escalável e pode processar milhares de requisições simultâneas, garantindo a disponibilidade e performance da aplicação.
@@ -78,6 +79,14 @@ A escolha do Apache Kafka como gerenciador de mensageria se baseia em diversos f
 3. Tolerância a Falhas: O Kafka oferece resiliência e tolerância a falhas, garantindo a integridade das mensagens mesmo em caso de falhas no sistema.
 4. Event Sourcing: O Kafka é adequado para implementar o padrão de Event Sourcing, mantendo um registro de todas as transações e garantindo a consistência do sistema.
 5. Integração com Spring Boot: A integração do Kafka com o Spring Boot simplifica o desenvolvimento e implantação de aplicativos Java baseados em microserviços.
+
+### Solução na AWS
+
+Uma vez que os serviços sejam migrados 100% para a AWS, sugere-se esta utilização de arquitetura de tópicos e filas:
+
+<p align="center">
+  <img src="https://github.com/postech-lanchonete/.github/assets/20681811/66783608-c155-4489-86c0-fb1e180328f0?raw=true" />
+</p>
 
 ## LGPD  <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
 
@@ -110,31 +119,34 @@ Após a exclusão, inativação ou anonimização dos dados do cliente, todas as
 
 Por exemplo, o serviço de pedidos retorna apenas o ID do cliente ao consultar a lista de pedidos. No entanto, se a consulta for para um pedido específico, o serviço de pedidos fará uma chamada ao serviço de clientes para buscar as informações necessárias, caso ainda existam.
 
-## OWASP ZAP  <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
+## OWASP ZAP  <img src="https://img.shields.io/badge/Fase-5-important.svg?">
 
 Os reports fornecidos pela ferramente ZAP podem ser [acessado aqui](https://postech-lanchonete.github.io/postech-relatorios/zap/).
 
-## Infraestrutura
+## Infraestrutura <img src="https://img.shields.io/badge/Fase-5-important.svg?">
 
-A infraestrutura do projeto será implementada utilizando soluções disponíveis na AWS, como EKS, DocumentDB e RDS. O diagrama do fluxo da infraestrutura pode ser visualizado abaixo:
+A infraestrutura do projeto proposta utiliza soluções disponíveis na AWS, como EKS, DocumentDB e RDS. O diagrama do fluxo da infraestrutura pode ser visualizado abaixo:
 
 <p align="center">
-  <img src="https://github.com/postech-lanchonete/.github/assets/20681811/90f03df1-b30e-4639-b176-d43b7b7ca343?raw=true" />
+  <img src="https://github.com/postech-lanchonete/.github/assets/20681811/b032dab3-06ab-424f-b413-6ee965f097eb?raw=true" />
 </p>
 
 <p align="justify">
-O Amazon EKS será responsável pelo gerenciamento das APIs, cada uma delas executando em uma instância EC2 dedicada. Além disso, considerando a necessidade de armazenamento de dados em múltiplos bancos, optaremos por diferentes soluções. O serviço DocumentDB será utilizado para armazenar os dados da aplicação de pagamentos, uma vez que a estrutura dessas informações não é crítica para o projeto e não envolve consultas complexas com múltiplas tabelas.
+  O Amazon EKS será responsável pelo gerenciamento das APIs, cada uma delas executando em uma instância EC2 dedicada. Além disso, considerando a necessidade de armazenamento de dados em múltiplos bancos, optaremos por diferentes soluções. O serviço DocumentDB será utilizado para armazenar os dados da aplicação de pagamentos, uma vez que a estrutura dessas informações não é crítica para o projeto e não envolve consultas complexas com múltiplas tabelas. 
 </p>
 <p align="justify">
-Quanto aos demais projetos, o Amazon RDS foi escolhido devido à sua simplicidade e facilidade de manutenção, proporcionando uma evolução mais ágil das APIs. Optamos por uma única instância de RDS para armazenar os dados, com uma divisão lógica necessária entre os contextos das aplicações. Por fim, o Amazon DynamoDB pode ser necessário para realizar o cache de informações, como tipos de lanches, dados dos clientes, entre outros.
+  Quanto aos demais projetos, o Amazon RDS foi escolhido devido à sua simplicidade e facilidade de manutenção, proporcionando uma evolução mais ágil das APIs. Optamos por uma única instância de RDS para armazenar os dados, com uma divisão lógica necessária entre os contextos das aplicações. Por fim, o Amazon DynamoDB pode ser necessário para realizar o cache de informações, como os dados dos lanches.
+</p>
+<p align="justify">
+  Quantos aos dados dos comprovantes de exclusão, inativação ou anonimização dos dados do cliente será usado o S3 para armazena-los.
 </p>
 
-## Domain-Driven Design (DDD)
+## Domain-Driven Design (DDD) <img src="https://img.shields.io/badge/Fase-1-white.svg?">
 
 Como anteriormente falado, o projeto utilizou DDD para guiar seu desenvolvimento. A seguir estão alguns dos materiais coletados. 
 
 <details>
-  <summary>Linguagem Ubíqua</summary>
+  <summary>Linguagem Ubíqua <img src="https://img.shields.io/badge/Fase-1-white.svg?"></summary>
 
 1. Lanchonete: Estabelecimento que oferece uma variedade de alimentos e bebidas.
 2. Cliente: Pessoa que faz um pedido na lanchonete.
@@ -159,7 +171,7 @@ Como anteriormente falado, o projeto utilizou DDD para guiar seu desenvolvimento
 </details>
 
 <details>
-  <summary>Fluxo de Funcionalidades (Representação Pictográfica)</summary>
+  <summary>Fluxo de Funcionalidades (Representação Pictográfica) <img src="https://img.shields.io/badge/Fase-1-white.svg?"></summary>
 
 <p align="justify">
   Alguns dos fluxos que este Sistema se propõe a resolver são os de realização do pedido e seu pagamento e a preparação e entrega do pedido. Os fluxos foram mapeados como são feitos hoje, sem a implementação do sistema, e como se visualiza após a sua implementação.
