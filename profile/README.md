@@ -112,9 +112,7 @@ curl -X PATCH 'http://localhost:8083/v1/pedidos/1/status?novoStatus=PRONTO' -H '
 ```sh
 curl -X 'GET' 'http://localhost:8080/v1/pedidos/1' -H 'accept: */*'
 ```
-</p>
 
-</details>
 ## LGPD <img src="https://img.shields.io/badge/Fase-5-important.svg?">
 
 ### Relatório RIPD
