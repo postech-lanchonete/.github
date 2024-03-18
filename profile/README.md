@@ -23,16 +23,6 @@
   </p>
 </details>
 
-## Monolito para microservicos <img src="https://img.shields.io/badge/Fase-4-blue.svg?">
-
-<p align="center">
-  <img src="https://github.com/postech-lanchonete/.github/assets/20681811/2409cb8c-d26b-4ec3-9763-a2a0cdc9d57b" />
-</p>
-
-<p align="justify">
-  Optamos pela transição do serviço monolítico para cinco microserviços distintos visando vantagens como escalabilidade independente, facilitação de manutenção e evolução, desacoplamento de responsabilidades, resiliência a falhas e a possibilidade de utilizar tecnologias específicas para cada contexto. Essa abordagem permite melhorias na eficiência operacional, agilidade no desenvolvimento e maior flexibilidade para adaptação às demandas específicas de cada serviço.
-</p>
-
 | Projeto                   | Cobertura de Código SonarCloud |
 |---------------------------|--------------------------------|
 | [postech-produtos](https://github.com/postech-lanchonete/postech-produtos) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=postech-lanchonete_postech-produtos&metric=coverage)](https://sonarcloud.io/summary/new_code?id=postech-lanchonete_postech-produtos) |
@@ -41,7 +31,7 @@
 | [postech-pagamento](https://github.com/postech-lanchonete/postech-pagamento) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=postech-lanchonete_postech-pagamento&metric=coverage)](https://sonarcloud.io/summary/new_code?id=postech-lanchonete_postech-pagamento) |
 | [postech-producao](https://github.com/postech-lanchonete/postech-producao) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=postech-lanchonete_postech-producao&metric=coverage)](https://sonarcloud.io/summary/new_code?id=postech-lanchonete_postech-producao) |
 
-## Padrão Saga <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
+## Padrão Saga <img src="https://img.shields.io/badge/Fase-5-important.svg?">
 
 <p align="justify">
   Este projeto implementa o padrão Saga para processar o fluxo de pagamento de uma aplicação utilizando o Apache Kafka como gerenciador de mensageria. O padrão Saga é utilizado para garantir a consistência e disponibilidade da aplicação, especialmente em cenários de transações distribuídas.
@@ -51,7 +41,7 @@
   <img src="https://github.com/postech-lanchonete/.github/assets/20681811/ca72bd9b-d630-48cd-8654-8aeca107682c" />
 </p>
 
-### Fluxo de Execução <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
+### Fluxo de Execução <img src="https://img.shields.io/badge/Fase-5-important.svg?">
 
 1. O processo se inicia com o serviço postech-pedido, responsável por receber e processar os pedidos dos clientes.
 2. Quando um pedido é recebido, o serviço postech-pedido publica uma mensagem no tópico do Kafka para iniciar o fluxo de pagamento.
@@ -65,13 +55,13 @@
 | Todos os tópicos também possuem um tópico DLQ caso a desserialização não seja possível |
 
 
-### Justificativa da Utilização do Tipo Orquestração <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
+### Justificativa da Utilização do Tipo Orquestração <img src="https://img.shields.io/badge/Fase-5-important.svg?">
 
 <p align="justify">
   Optou-se por utilizar o tipo de orquestração no padrão Saga devido à complexidade e dependência entre as etapas do processo de pagamento. A orquestração permite coordenar as diversas operações necessárias para concluir o fluxo de pagamento, garantindo a consistência e o controle do processo como um todo.
 </p>
 
-### Justificativa da Utilização do Apache Kafka <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
+### Justificativa da Utilização do Apache Kafka <img src="https://img.shields.io/badge/Fase-5-important.svg?">
 A escolha do Apache Kafka como gerenciador de mensageria se baseia em diversos fatores:
 
 1. Escalabilidade e Desempenho: O Apache Kafka é altamente escalável e pode processar milhares de requisições simultâneas, garantindo a disponibilidade e performance da aplicação.
@@ -88,6 +78,43 @@ Uma vez que os serviços sejam migrados 100% para a AWS, sugere-se esta utiliza�
   <img src="https://github.com/postech-lanchonete/.github/assets/20681811/66783608-c155-4489-86c0-fb1e180328f0?raw=true" />
 </p>
 
+### Rodar o projeto na máquina local <img src="https://img.shields.io/badge/Fase-5-important.sv
+
+Para testar a solução de forma local, sugiro a utilização deste [docker-compose](../infra/docker-compose.yml). Ele irá subir toda a infraestrutura necessária (zookeeper, kafka, mysql e mongodb) e também todas as cinco aplicações.
+
+Após isso, você pode rodar este teste rápido que criará um cliente, um produto, fará um pedido e irá aprová-lo. Ao fim, ele irá fazer uma requisição *GET* buscando as informações do pedido.
+
+```sh
+curl -X POST 'http://localhost:8081/v1/clientes' -H 'accept: */*' -H 'Content-Type: application/json' -d '{ "nome": "Daniel", "sobrenome": "Silva", "email": "daniel.silva@postech.com", "cpf": "123", "senha": "123" }'
+```
+
+```sh
+curl -X 'POST' 'http://localhost:8082/v1/produtos' -H 'accept: */*' -H 'Content-Type: application/json' -d '{"nome": "Hambúrguer", "categoria": "LANCHE", "preco": 10.99, "descricao": "Hambúrguer de carne bovina com queijo, alface, tomate e molho especial", "imagem": "https://example.com/hamburguer.jpg"}'
+```
+
+```sh
+curl -X POST 'http://localhost:8080/v1/pedidos' -H 'accept: */*' -H 'Content-Type: application/json' -d '{ "idCliente": 1, "idsProdutos": [ 1 ] }'
+```
+
+```sh
+curl -X GET 'http://localhost:8084/v1/pagamentos/status/PENDENTE' -H 'accept: application/json'
+```
+
+Para o próximo passo, será necessário pegar o ID do pagamento retornado na requisição anterior.
+
+```sh
+curl -X PATCH 'http://localhost:8084/v1/pagamentos/b8f2bd73-37b2-4765-942e-248eaf352b0c/status/APROVADO' -H 'accept: application/json'
+```
+```sh
+curl -X PATCH 'http://localhost:8083/v1/pedidos/1/status?novoStatus=PRONTO' -H 'accept: */*'
+```
+
+```sh
+curl -X 'GET' 'http://localhost:8080/v1/pedidos/1' -H 'accept: */*'
+```
+</p>
+
+</details>
 ## LGPD  <img src="https://img.shields.io/badge/Fase-5-important.svg?" alt="shield referente a fase">
 
 ### Relatório RIPD

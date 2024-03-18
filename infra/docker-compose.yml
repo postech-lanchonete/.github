@@ -1,0 +1,88 @@
+version: '3.7'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.4
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "22181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.4
+    depends_on:
+      - zookeeper
+    ports:
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: Mudar1234
+      MONGO_INITDB_DATABASE: pagamento
+
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysecretpassword
+      - MYSQL_DATABASE=pedidos,producao,clientes,produtos
+    ports:
+      - "3306:3306"
+
+  postech-pedidos:
+    depends_on:
+      - mysql
+      - kafka
+    image: danielmaria/postech-pedidos:latest
+    container_name: postech-pedidos
+    ports:
+      - "8080:8080"
+
+  postech-clientes:
+    depends_on:
+      - mysql
+    image: danielmaria/postech-clientes:latest
+    container_name: postech-clientes
+    ports:
+      - "8081:8080"
+
+  postech-produtos:
+    depends_on:
+      - mysql
+    image: danielmaria/postech-produtos:latest
+    container_name: postech-produtos
+    ports:
+      - "8082:8080"
+
+  postech-producao:
+    depends_on:
+      - mysql
+      - kafka
+      - postech-pedidos
+      - postech-pagamentos
+    image: danielmaria/postech-producao:latest
+    container_name: postech-producao
+    ports:
+      - "8083:8080"
+
+  postech-pagamentos:
+    depends_on:
+      - mysql
+      - kafka
+      - postech-pedidos
+    image: danielmaria/postech-pagamento:latest
+    container_name: postech-pagamentos
+    ports:
+      - "8084:8080"
