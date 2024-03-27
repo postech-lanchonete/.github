@@ -88,11 +88,11 @@ Todo o projeto pode ser usado utilizando Kubernetes. Os manifestos tanto da infr
 
 #### Docker compose
 
-Para testar a solução utilizando docker-compose você pode usar este arquivo: [docker-compose](../main/infra/docker-compose.yml). Ele irá subir toda a infraestrutura necessária (zookeeper, kafka, mysql e mongodb) e também todas as cinco aplicações.
+Para testar a solução utilizando docker-compose você pode usar este arquivo: [docker-compose](https://github.com/postech-lanchonete/.github/blob/main/infra/docker-compose.yml). Ele irá subir toda a infraestrutura necessária (zookeeper, kafka, mysql e mongodb) e também todas as cinco aplicações.
 
 ### Step by step
 
-Após rodar o projeto, você pode usar o arquivo [este Makefile](./Makefile) para inserir alguns dados na base de clientes e na base de produtos. Para rodar baste digitar `make -f profile/Makefile all` no terminal.
+Após rodar o projeto, você pode usar o arquivo [este Makefile](https://github.com/postech-lanchonete/.github/blob/main/profile/Makefile) para inserir alguns dados na base de clientes e na base de produtos. Para rodar baste digitar `make -f profile/Makefile all` no terminal.
 
 ## LGPD <img src="https://img.shields.io/badge/Fase-5-important.svg?">
 
