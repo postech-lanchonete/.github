@@ -21,15 +21,3 @@ curl_produtos_comidas:
 	curl -X 'POST' '$(PRODUTOS_URL)/v1/produtos' -H 'accept: */*' -H 'Content-Type: application/json' -d '{"nome": "Refrigerante", "categoria": "BEBIDA", "preco": 3.50, "descricao": "Lata de refrigerante de cola gelada", "imagem": "https://example.com/refrigerante.jpg"}'
 	curl -X 'POST' '$(PRODUTOS_URL)/v1/produtos' -H 'accept: */*' -H 'Content-Type: application/json' -d '{"nome": "Suco Natural de Laranja", "categoria": "BEBIDA", "preco": 4.99, "descricao": "Suco fresco e natural de laranja", "imagem": "https://example.com/suco_laranja.jpg"}'
 	curl -X 'POST' '$(PRODUTOS_URL)/v1/produtos' -H 'accept: */*' -H 'Content-Type: application/json' -d '{"nome": "Sorvete de Chocolate", "categoria": "SOBREMESA", "preco": 7.99, "descricao": "Sorvete cremoso de chocolate com calda quente", "imagem": "https://example.com/sorvete_chocolate.jpg"}'
-
-criar_pedido:
-	@echo "Criando pedido"
-	PEDIDO_ID=$$(curl -s -X POST '$(PEDIDOS_URL)/v1/pedidos' -H 'accept: */*' -H 'Content-Type: application/json' -d '{ "idCliente": 1, "idsProdutos": [ 1 ] }' | jq -r '.id'); \
-    echo "ID do pedido: $$PEDIDO_ID"
-	@echo "Consultando pagamentos"
-	export PAGAMENTO_ID := $(shell curl -s -X GET '$(PAGAMENTOS_URL)/v1/pagamentos/status/PENDENTE' -H 'accept: application/json' | jq -r '.[0].id')
-	echo "Aprovando pagamento"
-	curl -X PATCH 'http://localhost:49719/v1/pagamentos/$(PAGAMENTO_ID)/status/APROVADO' -H 'accept: application/json'
-	echo "Atualizando status e consultando pedido"
-	curl -X PATCH '$(PRODUCAO_URL)/v1/pedidos/$$PEDIDO_ID/status?novoStatus=PRONTO' -H 'accept: */*'
-	curl -X GET '$(PEDIDOS_URL)/v1/pedidos/$$PEDIDO_ID' -H 'accept: */*'
