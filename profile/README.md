@@ -80,38 +80,19 @@ Uma vez que os serviços sejam migrados 100% para a AWS, sugere-se esta utiliza�
 
 ### Rodar o projeto na máquina local <img src="https://img.shields.io/badge/Fase-5-important.svg?">
 
-Para testar a solução de forma local, sugiro a utilização deste [docker-compose](../main/infra/docker-compose.yml). Ele irá subir toda a infraestrutura necessária (zookeeper, kafka, mysql e mongodb) e também todas as cinco aplicações.
+Existem duas formas para rodar o projeto de forma local, uma sendo via kubernetes e outra via docker-compose.
 
-Após isso, você pode rodar este teste rápido que criará um cliente, um produto, fará um pedido e irá aprová-lo. Ao fim, ele irá fazer uma requisição *GET* buscando as informações do pedido.
+#### Kubernetes
 
-```sh
-curl -X POST 'http://localhost:8081/v1/clientes' -H 'accept: */*' -H 'Content-Type: application/json' -d '{ "nome": "Daniel", "sobrenome": "Silva", "email": "daniel.silva@postech.com", "cpf": "123", "senha": "123" }'
-```
+Todo o projeto pode ser usado utilizando Kubernetes. Os manifestos tanto da infra (zookeeper, kafka, mysql e mongodb) quanto as aplicações encontram-se no projeto [postech-kubernetes-infra](https://github.com/postech-lanchonete/postech-kubernetes-infra). Caso precise o README deste projeto contêm um pequeno tutorial.
 
-```sh
-curl -X 'POST' 'http://localhost:8082/v1/produtos' -H 'accept: */*' -H 'Content-Type: application/json' -d '{"nome": "Hambúrguer", "categoria": "LANCHE", "preco": 10.99, "descricao": "Hambúrguer de carne bovina com queijo, alface, tomate e molho especial", "imagem": "https://example.com/hamburguer.jpg"}'
-```
+#### Docker compose
 
-```sh
-curl -X POST 'http://localhost:8080/v1/pedidos' -H 'accept: */*' -H 'Content-Type: application/json' -d '{ "idCliente": 1, "idsProdutos": [ 1 ] }'
-```
+Para testar a solução utilizando docker-compose você pode usar este arquivo: [docker-compose](../main/infra/docker-compose.yml). Ele irá subir toda a infraestrutura necessária (zookeeper, kafka, mysql e mongodb) e também todas as cinco aplicações.
 
-```sh
-curl -X GET 'http://localhost:8084/v1/pagamentos/status/PENDENTE' -H 'accept: application/json'
-```
+### Step by step
 
-Para o próximo passo, será necessário pegar o ID do pagamento retornado na requisição anterior.
-
-```sh
-curl -X PATCH 'http://localhost:8084/v1/pagamentos/b8f2bd73-37b2-4765-942e-248eaf352b0c/status/APROVADO' -H 'accept: application/json'
-```
-```sh
-curl -X PATCH 'http://localhost:8083/v1/pedidos/1/status?novoStatus=PRONTO' -H 'accept: */*'
-```
-
-```sh
-curl -X 'GET' 'http://localhost:8080/v1/pedidos/1' -H 'accept: */*'
-```
+Após rodar o projeto, você pode usar o arquivo [este Makefile](./Makefile) para inserir alguns dados na base de clientes e na base de produtos. Para rodar baste digitar `make -f profile/Makefile all` no terminal.
 
 ## LGPD <img src="https://img.shields.io/badge/Fase-5-important.svg?">
 
